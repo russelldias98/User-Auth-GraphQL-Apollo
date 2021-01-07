@@ -1,13 +1,14 @@
 {
-  "name": "redis-test",
+  "name": "auth-server-graphql-apollo",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Russell Dias",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.6",
