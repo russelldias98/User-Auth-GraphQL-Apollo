@@ -27,7 +27,7 @@ module.exports = {
               expiresIn: '1h',
             },
           )
-          redis.setex(`${input.email}_TOKEN`, 60, token)
+          redis.setex(`${input.email}_TOKEN`, 3600, token)
           return {
             success: true,
             token,
