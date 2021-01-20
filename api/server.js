@@ -1,12 +1,15 @@
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const dotEnv = require('dotenv')
-const typeDefs = require('./typeDefs/index')
-const resolvers = require('./resolvers/index')
+const typeDefs = require('./typeDefs')
+const resolvers = require('./resolvers')
 const connectDB = require('./utils/connectDB')
 const Redis = require('ioredis')
 
-const redis = new Redis()
+const redis = new Redis({
+  port: process.env.REDIS_PORT,
+  host: process.env.REDIS_HOST,
+})
 
 const { verifyUser } = require('./utils/context')
 

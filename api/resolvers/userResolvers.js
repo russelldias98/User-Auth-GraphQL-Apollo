@@ -2,8 +2,8 @@ const bcrypt = require('bcryptjs')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 const { combineResolvers } = require('graphql-resolvers')
-const isValidOtp = require('../resolvers/middlewares/isValidOtp')
-const isValidToken = require('../resolvers/middlewares/isValidToken')
+const isValidOtp = require('./middlewares/isValidOtp')
+const isValidToken = require('./middlewares/isValidToken')
 
 module.exports = {
   Mutation: {
