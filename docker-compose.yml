@@ -1,0 +1,42 @@
+version: '3'
+services:
+  nginx:
+    depends_on:
+      - api
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./nginx
+    restart: always
+    ports:
+    - 80:80
+  redisapp:
+    restart: always
+    image: 'redis:latest'
+    environment:
+      - REDIS_APPENDONLY=yes
+      - REDIS_APPENDFSYNC=always
+    volumes:
+      - ./redis-data:/data
+  mongoapp:
+    image: 'mongo:latest'
+    restart: always
+    volumes:
+      - ./mongodata:/data/db
+  api:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./api
+    volumes:
+      - /app/node_modules
+      - ./api:/app
+    environment:
+      - DATABASE_URI=mongodb://mongoapp:27017/todoapp
+      - REDIS_HOST=redisapp
+      - SERVER_PORT=${SERVER_PORT}
+      - JWT_SECRET=${JWT_SECRET}
+      - REDIS_PORT=${REDIS_PORT}
+    depends_on:
+        - mongoapp
+
+
+
